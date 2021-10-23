@@ -1,5 +1,4 @@
 import { REFS } from './refs';
-import debounce from 'lodash.debounce';
 import FetchPics from './apiServise'
 import pictureGallery from '../partials/pictureGallery.hbs'
 /* 
@@ -68,32 +67,3 @@ function clearGalleryMarkup() {
     loaderButton.classList.remove('loader-btn---is-hidden');
    
 }
-
-
-
-
-
-
-
-
-
-
-
-/* function onInputChange(event) {
-   if (!event.target.value) {
-    return
-   }
-  
-  getPictures.pictureQuery = event.target.value;
-  
-  
-  //passing the input value to the fetch function
-  getPictures.fetchPics().then(createMarkupGallery)
-   
-}
-//creating gallery markup
-function createMarkupGallery(query) {
-
-  REFS.GALLERY_CONTAINER.innerHTML = pictureGallery(query); 
-
-} */
