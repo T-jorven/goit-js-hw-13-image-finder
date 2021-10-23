@@ -12,7 +12,11 @@ ul{
 img{
     width:450px;
     height: 300px;
-    margin: 5px;
+    margin-bottom: 0%;
+    display: block;
+}
+.material-icons{
+    margin-right: 5px;
 }
 .gallery{
     list-style: none;
@@ -22,9 +26,15 @@ img{
 }
 .stats{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: wrap;
-   
+    justify-content: space-evenly;
+   margin-bottom: 15px;
+   border: 1px solid RGB(221,221,255);
+   background-color: RGB(221,221,255);;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   max-width: 450px;
 }
 .stats-item{
     margin-left:10px;
@@ -32,9 +42,46 @@ img{
     margin-top: 0%;
     margin-right: 0%;
     display: flex;
-    
-
+}
+.photo-card{
+    margin-right: 10px;
 }
 .loader-btn---is-hidden{
     display: none;
+}
+.submit-btn{
+    padding: 8px;
+    background-color: RGB(221,221,255);
+    border-radius: 10%;
+    margin-top: 10px;
+     position: absolute;
+     left: 16%;
+     top: -10px;
+}
+.loader-btn{
+   padding: 8px;
+    background-color: RGB(221,221,255);
+    border-radius: 10%;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+input{
+  
+    -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+}
+.form-control {
+    margin-left: 26px;
+  display: flex;
+  padding: 8px;
+
+
+  border-radius: 3px;
+  width: 250px;
+  font-size: 14px;
+ 
+}
+.search-form__container{
+    position: relative;
 }

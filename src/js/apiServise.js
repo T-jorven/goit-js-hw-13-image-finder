@@ -13,17 +13,10 @@ export default class ApiServer{
    return await fetch(url).then(response => {
     return response.json();
     }).then((data) => {
-      console.log(data.hits)
       this.incrementPage()
       return data.hits;
      
-    })/* .then((pictures) => {
-      pictures.map(picture => {
-        return 
-      })
-    }).catch((err) => {
-      console.log(err);
-  }) */
+    })
     }
   
     

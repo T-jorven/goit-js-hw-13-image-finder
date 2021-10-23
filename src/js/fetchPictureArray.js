@@ -14,7 +14,7 @@ REFS.SEARCH_FORM.addEventListener('submit', function (event) {
   //clearing the previous query result
   clearGalleryMarkup()
   getPictures.pictureQuery = REFS.INPUT.value
-  if (REFS.INPUT.value === '') return;
+  if (REFS.INPUT.value.trim() === '') return;
    
    //passing the input value to the fetch function
   getPictures.resetPage()
@@ -33,12 +33,17 @@ REFS.LOADER_BTN.addEventListener('click', fetchMorePics);
 
 async function fetchMorePics(event) {
   event.preventDefault()
- 
-  const images = await getPictures.fetchPics();
-  
-   createMarkupGallery(images);
-  getPictures.incrementPage();
 
+  const images = await getPictures.fetchPics();
+  if (!images.length) {
+    loaderButtonIsHidden() 
+    nothingToShow()
+    return
+  }
+  createMarkupGallery(images);
+  
+  getPictures.incrementPage();
+  
 
   //scrolling 
 loaderButton.scrollIntoView({
@@ -53,17 +58,21 @@ loaderButton.scrollIntoView({
   function createMarkupGallery(query) {
   REFS.GALLERY_CONTAINER.insertAdjacentHTML('beforeend', pictureGallery(query)); 
 } 
-
 function clearGalleryMarkup() {
    REFS.GALLERY_CONTAINER.innerHTML = ''
 }
-
   function clearTheInputValue() {
   REFS.INPUT.value = ''
 }
-
-  function loaderButtonIsVisible() {
-  
+  function loaderButtonIsVisible() { 
     loaderButton.classList.remove('loader-btn---is-hidden');
-   
+  }
+function loaderButtonIsHidden() {
+    loaderButton.classList.add('loader-btn---is-hidden');
+}
+  
+//nothing more to show
+function nothingToShow() {
+  let string = `<p>Sorry, no more pictures to show :'(</p>`
+  REFS.GALLERY_CONTAINER.insertAdjacentHTML('beforeend', string)
 }
