@@ -8,33 +8,22 @@ REFS.SEARCH_FORM.addEventListener('input', debounce(onInputChange, 500)); */
 const getPictures = new FetchPics();
 
 
+
+//on button search
 REFS.SEARCH_FORM.addEventListener('submit', function (event) {
   event.preventDefault();
   getPictures.pictureQuery = REFS.INPUT.value
   if (REFS.INPUT.value === '') return;
    
    //passing the input value to the fetch function
+  getPictures.resetPage()
   getPictures.fetchPics().then(createMarkupGallery);
   clearTheInputValue()
-
+  
   //placing the loadmore button
    loaderButtonIsVisible()
-
+   
 });
-
-
-
-function createMarkupGallery(query) {
-
-  REFS.GALLERY_CONTAINER.innerHTML = pictureGallery(query); 
-
-} 
-
-function clearTheInputValue() {
-  REFS.INPUT.value = ''
-}
-
-
 
 //Fetching more pics
 
@@ -46,12 +35,20 @@ async function fetchMorePics(event) {
  
   const images = await getPictures.fetchPics();
   
-  await createMarkupGallery(images);
+   createMarkupGallery(images);
   getPictures.incrementPage();
 
 }
 
-//the button is visible
+
+//auxilary functions
+  function createMarkupGallery(query) {
+  REFS.GALLERY_CONTAINER.insertAdjacentHTML('beforeend', pictureGallery(query)); 
+} 
+
+  function clearTheInputValue() {
+  REFS.INPUT.value = ''
+}
 
   function loaderButtonIsVisible() {
   let loaderButton = REFS.LOADER_BTN;
