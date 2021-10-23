@@ -4,16 +4,26 @@ export default class ApiServer{
         this.page = 1
     }
 
-    fetchPics() {
+  async fetchPics() {
+        const BASE_URL = "https://pixabay.com/api/"
         const API_KEY = "23987533-c0735df4fa6081cfbbdc30c4f"
-        let url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`
+        let url = `${BASE_URL}?image_type=photo&orientation=horizontal&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`
         
-   return fetch(url).then(response => {
+   return await fetch(url).then(response => {
     
   return response.json();
-})
-
-    }
+   }).then((data) => {
+     console.log(data.hits)
+       return data.hits;
+   })/* .then((pictures) => {
+     pictures.map(picture => {
+       return 
+     })
+   }).catch((err) => {
+     console.log(err);
+}) */
+   }
+  
     
     incrementPage() {
     this.page += 1;
