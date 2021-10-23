@@ -18,7 +18,9 @@ REFS.SEARCH_FORM.addEventListener('submit', function (event) {
    
    //passing the input value to the fetch function
   getPictures.resetPage()
-  getPictures.fetchPics().then(createMarkupGallery);
+  getPictures.fetchPics().then(array => {
+    if (!array.length) { loaderButtonIsHidden(); nothingFound(); }; return array
+  }).then(createMarkupGallery);
   clearTheInputValue()
   
   //placing the loadmore button
@@ -67,12 +69,16 @@ function clearGalleryMarkup() {
   function loaderButtonIsVisible() { 
     loaderButton.classList.remove('loader-btn---is-hidden');
   }
-function loaderButtonIsHidden() {
+ function loaderButtonIsHidden() {
     loaderButton.classList.add('loader-btn---is-hidden');
 }
   
 //nothing more to show
 function nothingToShow() {
-  let string = `<p>Sorry, no more pictures to show :'(</p>`
+  let string = `<p class ='text-notify'>Sorry, no more pictures to show :'(</p>`
+  REFS.GALLERY_CONTAINER.insertAdjacentHTML('beforeend', string)
+}
+function nothingFound() {
+    let string = `<p class ='text-notify'>Nothing found. Please, try to change your query</p>`
   REFS.GALLERY_CONTAINER.insertAdjacentHTML('beforeend', string)
 }

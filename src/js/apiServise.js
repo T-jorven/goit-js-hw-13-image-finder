@@ -12,7 +12,8 @@ export default class ApiServer{
         
    return await fetch(url).then(response => {
     return response.json();
-    }).then((data) => {
+   }).then((data) => {
+      
       this.incrementPage()
       return data.hits;
      
