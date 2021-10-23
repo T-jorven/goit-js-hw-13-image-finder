@@ -6,12 +6,14 @@ import pictureGallery from '../partials/pictureGallery.hbs'
 REFS.SEARCH_FORM.addEventListener('input', debounce(onInputChange, 500)); */
 
 const getPictures = new FetchPics();
-
+let loaderButton = REFS.LOADER_BTN;
 
 
 //on button search
 REFS.SEARCH_FORM.addEventListener('submit', function (event) {
   event.preventDefault();
+  //clearing the previous query result
+  clearGalleryMarkup()
   getPictures.pictureQuery = REFS.INPUT.value
   if (REFS.INPUT.value === '') return;
    
@@ -38,6 +40,13 @@ async function fetchMorePics(event) {
    createMarkupGallery(images);
   getPictures.incrementPage();
 
+
+  //scrolling 
+loaderButton.scrollIntoView({
+  behavior: 'smooth',
+  block: 'end',
+})
+  
 }
 
 
@@ -46,13 +55,18 @@ async function fetchMorePics(event) {
   REFS.GALLERY_CONTAINER.insertAdjacentHTML('beforeend', pictureGallery(query)); 
 } 
 
+function clearGalleryMarkup() {
+   REFS.GALLERY_CONTAINER.innerHTML = ''
+}
+
   function clearTheInputValue() {
   REFS.INPUT.value = ''
 }
 
   function loaderButtonIsVisible() {
-  let loaderButton = REFS.LOADER_BTN;
-  loaderButton.classList.remove('loader-btn---is-hidden');
+  
+    loaderButton.classList.remove('loader-btn---is-hidden');
+   
 }
 
 
