@@ -14,7 +14,10 @@ REFS.SEARCH_FORM.addEventListener('submit', function (event) {
   //clearing the previous query result
   clearGalleryMarkup()
   getPictures.pictureQuery = REFS.INPUT.value
-  if (REFS.INPUT.value.trim() === '') return;
+  if (REFS.INPUT.value.trim() === '') {
+    loaderButtonIsHidden()
+    return
+  };
    
    //passing the input value to the fetch function
   getPictures.resetPage()
